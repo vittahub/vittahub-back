@@ -1,0 +1,30 @@
+name: Deploy and Migrate
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '14'
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Run migrations
+        run: npm run migrate  # Roda as migrações do Knex
+
+      - name: Deploy to Render
+        run: |
+          git remote add render https://git.render.com/username/repository.git
+          git push render main
