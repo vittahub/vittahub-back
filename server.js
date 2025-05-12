@@ -10,7 +10,7 @@ if (process.env.NODE_ENV === 'production') {
     runMigrations();
 }
 const corsOptions = process.env.NODE_ENV === 'production' ? {
-    origin: '*',
+    origin: 'https://vittahub.vercel.app',
     methods: ['GET', 'POST'],
     allowedHeaders: ['Content-Type', 'Authorization'],
 } : {
