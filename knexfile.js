@@ -1,6 +1,6 @@
 require('dotenv').config();
 
-const ssl = process.env.SSL_DB === 'true';
+const ssl = process.env.NODE_ENV === 'production';
 
 module.exports = {
   development: {
