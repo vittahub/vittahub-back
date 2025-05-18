@@ -1,6 +1,7 @@
+import type { Knex } from "knex";
 const ssl = process.env.NODE_ENV === 'production';
 
-module.exports = {
+const config: { [key: string]: Knex.Config } = {
   development: {
     client: 'pg',
     connection: ssl
@@ -14,3 +15,5 @@ module.exports = {
     }
   }
 };
+
+export default config;

@@ -1,9 +1,10 @@
-require('dotenv').config();
-const express = require('express');
-const cors = require('cors');
-const routes = require('./src/routes');
-const runMigrations = require('./src/migrations'); // Importar a função de migração
-const app = express();
+import 'dotenv/config';
+import express, { Application } from 'express';
+import cors from 'cors';
+import routes from './src/routes';
+import runMigrations from './src/migrations'; // Importar a função de migração
+
+const app: Application = express();
 
 // Configuração de producao
 if (process.env.NODE_ENV === 'production') {
