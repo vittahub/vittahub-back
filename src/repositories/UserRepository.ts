@@ -12,7 +12,7 @@ export class UserRepository implements IUserReadRepository, IUserWriteRepository
 
     async create(user_data: Omit<User, 'id'>): Promise<User> {
         const [row] = await this.db('users').insert(user_data)
-                                            .returning(['id', 'name', 'email', 'password'])
+                                            .returning(['id', 'email', 'password'])
         
         return new User(row.id, row.email, row.password);
     }
