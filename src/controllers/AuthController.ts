@@ -12,13 +12,13 @@ export class AuthController {
     req: Request<{}, {}, RegisterRequest>,
     res: Response<RegisterResponse>
   ) => {
-    const { name, email, password } = req.body;
+    const { email, password } = req.body;
 
     const userExists = await this.userRepository.findByEmail(email);
     if (userExists) return res.status(400).json({ error: 'User already exists' });
 
     const hashedPassword = await bcrypt.hash(password, 10);
-    const user = await this.userRepository.create({ name, email, password: hashedPassword });
+    const user = await this.userRepository.create({ email, password: hashedPassword });
 
     if(user == null) return res.status(500).json({ error: 'Occured a error during user creation'})
   

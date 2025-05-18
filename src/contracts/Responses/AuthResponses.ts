@@ -3,13 +3,11 @@ import { ErrorResponse } from "../ErrorResponse";
 
 export interface UserResponse {
     id: number;
-    name: string;
     email: string
 };
 
 export const toUserResponse = (user: User): UserResponse => ({
     id: user.id,
-    name: user.name,
     email:user.email
 });
 

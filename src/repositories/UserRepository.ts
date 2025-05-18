@@ -14,11 +14,11 @@ export class UserRepository implements IUserReadRepository, IUserWriteRepository
         const [row] = await this.db('users').insert(user_data)
                                             .returning(['id', 'name', 'email', 'password'])
         
-        return new User(row.id, row.name, row.email, row.password);
+        return new User(row.id, row.email, row.password);
     }
     
     async findByEmail(email: string): Promise<User | null> {
         const user = await this.db('users').where({ email }).first();
-        return user ? new User(user.id, user.name, user.email, user.password) : null;
+        return user ? new User(user.id, user.email, user.password) : null;
     }
 }

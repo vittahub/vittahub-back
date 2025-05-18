@@ -27,7 +27,7 @@ describe("UserRepository", () => {
     expect(mockDb).toHaveBeenCalledWith('users');
     expect(mockBuilder.insert).toHaveBeenCalledWith(userData);
     expect(mockBuilder.returning).toHaveBeenCalledWith(['id', 'name', 'email', 'password']);
-    expect(createdUser).toEqual(new User(123, 'jose', 'jose@email.com', 'hashed'));
+    expect(createdUser).toEqual(new User(123, 'jose@email.com', 'hashed'));
   });
 
   it("should find a user by email", async () => {
@@ -36,7 +36,7 @@ describe("UserRepository", () => {
     expect(mockDb).toHaveBeenCalledWith('users');
     expect(mockBuilder.where).toHaveBeenCalledWith({ email: 'jose@email.com' });
     expect(mockBuilder.first).toHaveBeenCalled();
-    expect(foundUser).toEqual(new User(123, 'jose', 'jose@email.com', 'hashed'));
+    expect(foundUser).toEqual(new User(123, 'jose@email.com', 'hashed'));
   });
 
   it("should return null if user not found", async () => {
