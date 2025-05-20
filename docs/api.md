@@ -34,7 +34,13 @@ POST /auth/register/patient
     "password": "MyPassword",
     "birthdate": "05/11/2001",
     "sex": "male",
-    "address": "1",
+    "address": {
+        "street": "R. Jaime Leonel Chaves",
+        "number": "2134",
+        "country": "Brazil",
+        "city": "Limoeiro Do Norte",
+        "zip_code": "6293000"
+    },
     "phone_1": "88998765432",
     "phone_2": null,
     "CPF": "36938081042"
@@ -55,7 +61,13 @@ POST /auth/register/patient
         "email": "jose@email.com",
         "birthdate": "2001-11-05",
         "sex": "male",
-        "address": 1,
+        "address": {
+            "street": "R. Jaime Leonel Chaves",
+            "number": "2134",
+            "country": "Brazil",
+            "city": "Limoeiro Do Norte",
+            "zip_code": "6293000"
+        },
         "phone_1": "88998765432",
         "phone_2": null,
         "CPF": "36938081042"
@@ -75,7 +87,13 @@ POST /auth/register/clinic
     "email": "clinicinc@email.com",
     "password": "MyPassword",
     "CNPJ": "87263120000160",
-    "address": 1,
+    "address": {
+        "street": "R. Jaime Leonel Chaves",
+        "number": "2134",
+        "country": "Brazil",
+        "city": "Limoeiro Do Norte",
+        "zip_code": "6293000"
+    },
     "phone": "88998765432",
     "whatsapp": "88998765432"
 }
@@ -93,7 +111,13 @@ POST /auth/register/clinic
     "name" : "Clinic Inc.",
     "email": "clinicinc@email.com",
     "CNPJ": "87263120000160",
-    "address": 1,
+    "address": {
+        "street": "R. Jaime Leonel Chaves",
+        "number": "2134",
+        "country": "Brazil",
+        "city": "Limoeiro Do Norte",
+        "zip_code": "6293000"
+    },
     "phone": "88998765432",
     "whatsapp": "88998765432"
 }
