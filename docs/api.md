@@ -3,8 +3,15 @@
 - [VittaHub API](#vittahub-api)
   - [Auth Routes](#auth-routes)
     - [Auth Register](#auth-register)
-        - [Auth Register Request](#auth-register-request)
-        - [Auth Register Response](#auth-register-response)
+        - [Auth Pacient Register Request](#auth-pacient-register-request)
+        - [Auth Pacient Register Response](#auth-pacient-register-response)
+        - [Auth Clinic Register Request](#auth-clinic-register-request)
+        - [Auth Clinic Register Response](#auth-clinic-register-response)
+    - [Clinic Employee Register](#clinic-employee-register)
+        - [Specialist Register Request](#specialist-register-request)
+        - [Specialist Register Response](#specialist-register-response)
+        - [Employee Register Request](#specialist-register-request)
+        - [Employee Register Response](#specialist-register-response)
     - [Auth Login](#auth-login)
         - [Auth Login Request](#auth-login-request)
         - [Auth Login Response](#auth-login-response)
@@ -14,20 +21,27 @@
 
 ### Auth Register
 
-#### Auth Register Request
+#### Auth Pacient Register Request
 
 ```js
-POST /auth/register
+POST /auth/register/patient
 ```
 
 ```json
 {
-    "email": "myemail@email.com",
+    "name" : "jose",
+    "email": "jose@email.com",
     "password": "MyPassword",
+    "birthdate": "05/11/2001",
+    "sex": "male",
+    "address": "1",
+    "phone_1": "88998765432",
+    "phone_2": null,
+    "CPF": "36938081042"
 }
 ```
 
-#### Auth Register Response
+#### Auth Pacient Register Response
 
 ```js
 201 Created
@@ -36,9 +50,121 @@ POST /auth/register
 ```json
 {
     "user": {
-        "id": 16,
-        "email": "myemail@email.com"
+        "id" : 17,
+        "name" : "jose",
+        "email": "jose@email.com",
+        "birthdate": "2001-11-05",
+        "sex": "male",
+        "address": 1,
+        "phone_1": "88998765432",
+        "phone_2": null,
+        "CPF": "36938081042"
     }
+}
+```
+
+#### Auth Clinic Register Request
+
+```js
+POST /auth/register/clinic
+```
+
+```json
+{
+    "name" : "Clinic Inc.",
+    "email": "clinicinc@email.com",
+    "password": "MyPassword",
+    "CNPJ": "87263120000160",
+    "address": 1,
+    "phone": "88998765432",
+    "whatsapp": "88998765432"
+}
+```
+
+#### Auth Clinic Register Response
+
+```js
+201 Created
+```
+
+```json
+{
+    "id": 1,
+    "name" : "Clinic Inc.",
+    "email": "clinicinc@email.com",
+    "CNPJ": "87263120000160",
+    "address": 1,
+    "phone": "88998765432",
+    "whatsapp": "88998765432"
+}
+```
+
+### Clinic Employee Register
+
+#### Specialist Register Request
+
+```js
+POST /clinic/specialists
+```
+
+```json
+{
+    "name": "mario",
+    "email": "specialist@email.com",
+    "password": "MyPassword",
+    "speciality": "cardiologist",
+    "phone": "88998765432"
+}
+```
+
+#### Specialist Register Response
+
+```js
+201 Created
+```
+
+```json
+{
+    "id": 1,
+    "clinic_id": 1,
+    "name": "mario",
+    "email": "specialist@email.com",
+    "speciality": "cardiologist",
+    "phone": "88998765432"
+}
+```
+
+#### Employee Register Request
+
+```js
+POST /clinic/employees
+```
+
+```json
+{
+    "name": "luigi",
+    "email": "employee@email.com",
+    "password": "MyPassword",
+    "role": "attendant",
+    "phone": "88998765432"
+}
+```
+
+#### Employee Register Response
+
+```js
+201 Created
+```
+
+```json
+{
+    "id": 1,
+    "clinic_id": 1,
+    "name": "luigi",
+    "email": "employee@email.com",
+    "role": "attendant",
+    "role_id": 1,
+    "phone": "88998765432"
 }
 ```
 
@@ -52,7 +178,7 @@ POST /auth/login
 ```json
 {
     "email": "myemail@email.com",
-    "password": "MyPassword",
+    "password": "MyPassword"
 }
 ```
 
@@ -64,7 +190,7 @@ POST /auth/login
 ```json
 {
   "user": {
-    "id": 16,
+    "id": 17,
     "email": "myemail@email.com"
   },
   "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTYsImlhdCI6MTc0NzU5NTk4MywiZXhwIjoxNzQ3NjgyMzgzfQ.csh8Q111BTtOg8CrfzGSSV3XtvzPgCpPkU6Z3QRR6QE"
