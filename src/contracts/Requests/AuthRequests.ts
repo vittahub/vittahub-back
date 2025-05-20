@@ -8,6 +8,7 @@ export interface PatientRegisterRequest {
   name: string;
   email: string;
   password: string;
+  password_confirmation: string;
   birthdate: string;
   sex: 'male' | 'female' | 'other';
   address: {
@@ -26,6 +27,7 @@ export interface ClinicRegisterRequest {
   name: string;
   email: string;
   password: string;
+  password_confirmation: string;
   cnpj: string;
   address: {
     street: string;
@@ -42,6 +44,7 @@ export interface SpecialistRegisterRequest {
   name: string;
   email: string;
   password: string;
+  password_confirmation: string;
   speciality: string;
   phone: string;
 }
@@ -50,6 +53,7 @@ export interface EmployeeRegisterRequest {
   name: string;
   email: string;
   password: string;
+  password_confirmation: string;
   role: string;
   phone: string;
 }
