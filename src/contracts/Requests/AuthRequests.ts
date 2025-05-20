@@ -10,7 +10,13 @@ export interface PatientRegisterRequest {
   password: string;
   birthdate: string;
   sex: 'male' | 'female' | 'other';
-  //address
+  address: {
+    street: string;
+    number: string;
+    country: string;
+    city: string;
+    zip_code: string;
+  }
   phone_1:string;
   phone_2?:string;
   cpf:string;
@@ -21,7 +27,13 @@ export interface ClinicRegisterRequest {
   email: string;
   password: string;
   cnpj: string;
-  //address
+  address: {
+    street: string;
+    number: string;
+    country: string;
+    city: string;
+    zip_code: string;
+  }
   phone: string;
   whatsapp?: string;
 }
