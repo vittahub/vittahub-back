@@ -32,6 +32,7 @@ POST /auth/register/patient
     "name" : "jose",
     "email": "jose@email.com",
     "password": "MyPassword",
+    "password_confirmation" : "MyPassword",
     "birthdate": "05/11/2001",
     "sex": "male",
     "address": {
@@ -86,6 +87,7 @@ POST /auth/register/clinic
     "name" : "Clinic Inc.",
     "email": "clinicinc@email.com",
     "password": "MyPassword",
+    "password_confirmation" : "MyPassword",
     "CNPJ": "87263120000160",
     "address": {
         "street": "R. Jaime Leonel Chaves",
@@ -136,6 +138,7 @@ POST /clinic/specialists
     "name": "mario",
     "email": "specialist@email.com",
     "password": "MyPassword",
+    "password_confirmation" : "MyPassword",
     "speciality": "cardiologist",
     "phone": "88998765432"
 }
@@ -169,6 +172,7 @@ POST /clinic/employees
     "name": "luigi",
     "email": "employee@email.com",
     "password": "MyPassword",
+    "password_confirmation" : "MyPassword",
     "role": "attendant",
     "phone": "88998765432"
 }
