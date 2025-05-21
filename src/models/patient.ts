@@ -4,7 +4,7 @@ import { Sex } from "../types/Enums";
 export type Patient = {
   user_id: number;
   name: string;
-  birthdate: Date;
+  birthdate: string;
   sex: Sex;
   address: Address;
   phone_1: string;

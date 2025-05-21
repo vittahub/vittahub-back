@@ -8,7 +8,7 @@ interface PatientRegisterSucessResponse {
     name: string,
     email: string,
     role: Role,
-    birthdate: Date,
+    birthdate: string,
     sex: Sex,
     address: Address,
     phone_1: string,
