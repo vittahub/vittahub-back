@@ -1,15 +1,23 @@
 import { Router, Response } from 'express';
-import { AuthController } from '../controllers/AuthController';
-import authMiddleware from '../middleware/authMiddleware';
+
+import db from '../database/connection';
 import { AuthenticationRequest } from '../types/auth';
 import { asyncHandler } from '../helpers/asyncHandler';
+import { AuthController } from '../controllers/AuthController';
+import { PatientController } from '../controllers/PatientController';
+import { validate } from '../middleware/validate';
+import authMiddleware from '../middleware/authMiddleware';
+import { PatientRegisterSchema } from '../middleware/validationSchemes/authDTO/PatientRegister';
 import { UserRepository } from '../repositories/UserRepository';
-import db from '../database/connection';
+import { PatientRepository } from '../repositories/PatientRepository';
 
 const authRoutes = Router();
 const authController = new AuthController(new UserRepository(db))
+const patientController = new PatientController(new UserRepository(db), new PatientRepository(db))
 
-authRoutes.post('/register', asyncHandler(authController.register));
+authRoutes.post('/register/patient',
+                validate(PatientRegisterSchema),
+                asyncHandler(patientController.registerPatient));
 
 authRoutes.post('/login', asyncHandler(authController.login));
 
