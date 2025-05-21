@@ -4,7 +4,6 @@ exports.up = function(knex) {
     table.increments('id').primary();      // ID autoincrementável
     table.string('email', 255).notNullable().unique();  // Email único e obrigatório
     table.string('password').notNullable();        // Senha obrigatória
-    table.string('role').notNullable();
     table.timestamps(true, true);                   // Cria campos created_at e updated_at
   });
 };
