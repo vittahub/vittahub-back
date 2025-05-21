@@ -1,3 +1,5 @@
+import * as Enums from '../../types/Enums';
+
 export interface LoginRequest {
   email: string;
   password: string;
@@ -8,8 +10,9 @@ export interface PatientRegisterRequest {
   email: string;
   password: string;
   password_confirmation: string;
-  birthdate: string;
-  sex: 'male' | 'female' | 'other';
+  role: Enums.Role;
+  birthdate: Date;
+  sex: Enums.Sex;
   address: {
     street: string;
     number: string;
@@ -27,6 +30,7 @@ export interface ClinicRegisterRequest {
   email: string;
   password: string;
   password_confirmation: string;
+  role: Enums.Role
   cnpj: string;
   address: {
     street: string;
@@ -44,6 +48,7 @@ export interface SpecialistRegisterRequest {
   email: string;
   password: string;
   password_confirmation: string;
+  role: Enums.Role
   speciality: string;
   phone: string;
 }
@@ -53,6 +58,7 @@ export interface EmployeeRegisterRequest {
   email: string;
   password: string;
   password_confirmation: string;
-  role: string;
+  role: Enums.Role
+  function: string;
   phone: string;
 }
