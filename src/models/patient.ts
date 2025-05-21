@@ -1,0 +1,17 @@
+import { Address } from "../types/address";
+import { Sex } from "../types/Enums";
+
+export type Patient = {
+  user_id: number;
+  name: string;
+  birthdate: Date;
+  sex: Sex;
+  address: Address;
+  phone_1: string;
+  phone_2: string | null;
+  cpf: string;
+}
+
+export function isAdult(birthdate: Date): boolean {
+  return new Date().getFullYear() - birthdate.getFullYear() >= 18;
+}
