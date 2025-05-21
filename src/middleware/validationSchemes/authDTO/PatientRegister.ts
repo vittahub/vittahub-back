@@ -1,7 +1,7 @@
 import { z } from 'zod';
 import { PatientRegisterRequest } from '../../../contracts/Requests/AuthRequests'
 import isValidCPF from '../../../helpers/cpfValidation';
-import { isAdult } from 'src/models/patient';
+import { isAdult } from '../../../models/patient';
 
 export const PatientRegisterSchema: z.ZodType<PatientRegisterRequest> = z.object({
     name: z.string().min(2, "name too short").max(100, "name too long"),

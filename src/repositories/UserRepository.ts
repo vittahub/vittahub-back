@@ -1,7 +1,7 @@
 import { BaseRepository } from "./BaseRepository";
-import { IUserRepository } from "src/contracts/Repositories/IUserRepository";
+import { IUserRepository } from "../contracts/Repositories/IUserRepository";
 import { Knex } from "knex";
-import { User } from "src/models/user";
+import { User } from "../models/user";
 
 export class UserRepository extends BaseRepository<User> implements IUserRepository{
     constructor(db: Knex){

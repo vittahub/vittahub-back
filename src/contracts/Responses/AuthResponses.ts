@@ -1,7 +1,7 @@
-import { Role, Sex } from "src/types/Enums";
+import { Role, Sex } from "../../types/Enums";
 import { User } from "../../models/user";
 import { ErrorResponse } from "../ErrorResponse";
-import { Address } from "src/types/address";
+import { Address } from "../../types/address";
 
 interface PatientRegisterSucessResponse {
     id: number,
