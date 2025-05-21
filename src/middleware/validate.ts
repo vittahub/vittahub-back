@@ -10,7 +10,6 @@ export const validate = (schema: ZodSchema) =>
             message: "validation failed",
             errors: result.error.errors
         });
-        next()
         return;
     }
     req.body = result.data;
