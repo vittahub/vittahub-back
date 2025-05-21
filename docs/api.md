@@ -45,7 +45,7 @@ POST /auth/register/patient
     },
     "phone_1": "88998765432",
     "phone_2": null,
-    "CPF": "36938081042"
+    "cpf": "36938081042"
 }
 ```
 
@@ -73,7 +73,7 @@ POST /auth/register/patient
         },
         "phone_1": "88998765432",
         "phone_2": null,
-        "CPF": "36938081042"
+        "cpf": "36938081042"
     }
 }
 ```
@@ -91,7 +91,7 @@ POST /auth/register/clinic
     "password": "MyPassword",
     "password_confirmation" : "MyPassword",
     "role": "clinic",
-    "CNPJ": "87263120000160",
+    "cnpj": "87263120000160",
     "address": {
         "street": "R. Jaime Leonel Chaves",
         "number": "2134",
@@ -116,7 +116,7 @@ POST /auth/register/clinic
     "name" : "Clinic Inc.",
     "email": "clinicinc@email.com",
     "role": "clinic",
-    "CNPJ": "87263120000160",
+    "cnpj": "87263120000160",
     "address": {
         "street": "R. Jaime Leonel Chaves",
         "number": "2134",
