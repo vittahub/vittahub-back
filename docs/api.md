@@ -33,6 +33,7 @@ POST /auth/register/patient
     "email": "jose@email.com",
     "password": "MyPassword",
     "password_confirmation" : "MyPassword",
+    "role": "patient",
     "birthdate": "05/11/2001",
     "sex": "male",
     "address": {
@@ -60,6 +61,7 @@ POST /auth/register/patient
         "id" : 17,
         "name" : "jose",
         "email": "jose@email.com",
+        "role": "patient",
         "birthdate": "2001-11-05",
         "sex": "male",
         "address": {
@@ -88,6 +90,7 @@ POST /auth/register/clinic
     "email": "clinicinc@email.com",
     "password": "MyPassword",
     "password_confirmation" : "MyPassword",
+    "role": "clinic",
     "CNPJ": "87263120000160",
     "address": {
         "street": "R. Jaime Leonel Chaves",
@@ -112,6 +115,7 @@ POST /auth/register/clinic
     "id": 1,
     "name" : "Clinic Inc.",
     "email": "clinicinc@email.com",
+    "role": "clinic",
     "CNPJ": "87263120000160",
     "address": {
         "street": "R. Jaime Leonel Chaves",
@@ -139,6 +143,8 @@ POST /clinic/specialists
     "email": "specialist@email.com",
     "password": "MyPassword",
     "password_confirmation" : "MyPassword",
+    "role": "specialist",
+    "specialist"
     "speciality": "cardiologist",
     "phone": "88998765432"
 }
@@ -156,6 +162,7 @@ POST /clinic/specialists
     "clinic_id": 1,
     "name": "mario",
     "email": "specialist@email.com",
+    "role": "specialist",
     "speciality": "cardiologist",
     "phone": "88998765432"
 }
@@ -173,7 +180,8 @@ POST /clinic/employees
     "email": "employee@email.com",
     "password": "MyPassword",
     "password_confirmation" : "MyPassword",
-    "role": "attendant",
+    "role": "employee",
+    "function": "attendant",
     "phone": "88998765432"
 }
 ```
@@ -190,8 +198,8 @@ POST /clinic/employees
     "clinic_id": 1,
     "name": "luigi",
     "email": "employee@email.com",
-    "role": "attendant",
-    "role_id": 1,
+    "role": "employee",
+    "function": "attendant",
     "phone": "88998765432"
 }
 ```
@@ -206,7 +214,8 @@ POST /auth/login
 ```json
 {
     "email": "myemail@email.com",
-    "password": "MyPassword"
+    "password": "MyPassword",
+    "role": "patient"
 }
 ```
 
