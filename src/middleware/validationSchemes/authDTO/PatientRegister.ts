@@ -9,9 +9,9 @@ export const PatientRegisterSchema: z.ZodType<PatientRegisterRequest> = z.object
     password: z.string().min(6, "password too short"),
     password_confirmation: z.string(),
     role: z.enum(["patient", "clinic", "specialist", "employee"]),
-    birthdate: z.date().refine(isAdult,
-        { message: "over 18 only"}
-    ),
+    birthdate: z.string()
+        .refine(val => !isNaN(Date.parse(val)), {message: "invalid date"})
+        .refine(isAdult, { message: "over 18 only"}),
     sex: z.enum(["male", "female", "other"]),
     address: z.object({
         street: z.string(),

@@ -12,6 +12,6 @@ export type Patient = {
   cpf: string;
 }
 
-export function isAdult(birthdate: Date): boolean {
-  return new Date().getFullYear() - birthdate.getFullYear() >= 18;
+export function isAdult(birthdate: string): boolean {
+  return new Date().getFullYear() - new Date(birthdate).getFullYear() >= 18;
 }

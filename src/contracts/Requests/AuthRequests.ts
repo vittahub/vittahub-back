@@ -11,7 +11,7 @@ export interface PatientRegisterRequest {
   password: string;
   password_confirmation: string;
   role: Enums.Role;
-  birthdate: Date;
+  birthdate: string;
   sex: Enums.Sex;
   address: {
     street: string;
