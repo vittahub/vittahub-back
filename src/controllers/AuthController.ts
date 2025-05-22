@@ -1,31 +1,16 @@
 import { Request, Response } from 'express';
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
-import { RegisterRequest, LoginRequest } from '../contracts/Requests/AuthRequests'
-import { UserResponse, LoginResponse, RegisterResponse, toUserResponse } from '../contracts/Responses/AuthResponses';
+
+import { LoginRequest } from '../contracts/Requests/AuthRequests'
+import { UserResponse, LoginResponse, toUserResponse } from '../contracts/Responses/AuthResponses';
 import { UserRepository } from '../repositories/UserRepository';
 
 export class AuthController {
-  constructor(private userRepository: UserRepository){}
-
-  register = async (
-    req: Request<{}, {}, RegisterRequest>,
-    res: Response<RegisterResponse>
-  ) => {
-    const { email, password } = req.body;
-
-    const userExists = await this.userRepository.findByEmail(email);
-    if (userExists) return res.status(400).json({ error: 'User already exists' });
-
-    const hashedPassword = await bcrypt.hash(password, 10);
-    const user = await this.userRepository.create({ email, password: hashedPassword });
-
-    if(user == null) return res.status(500).json({ error: 'Occured a error during user creation'})
+  constructor(
+    private userRepository: UserRepository,
+  ){}
   
-    const userResponse = toUserResponse(user);
-    return res.status(201).json({user: userResponse});
-  };
-
   login = async (
     req: Request<{}, {}, LoginRequest>,
     res: Response<LoginResponse>
