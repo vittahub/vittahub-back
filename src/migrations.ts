@@ -1,8 +1,10 @@
-const knex = require('knex');
-const knexConfig = require('../knexfile').development; // Certifique-se de usar a configuração correta
-const db = knex(knexConfig);
+import knex, { Knex } from 'knex';
+import knexConfig from '../knexfile';
 
-async function runMigrations() {
+//const knexConfig = require('../knexfile').development; // Certifique-se de usar a configuração correta
+const db: Knex = knex(knexConfig.development);
+
+async function runMigrations(): Promise<void> {
     try {
         // Rodar as migrações automaticamente
         await db.migrate.latest();
@@ -16,4 +18,4 @@ async function runMigrations() {
 }
 
 // Exportar a função para uso em outros arquivos
-module.exports = runMigrations;
+export default runMigrations;
