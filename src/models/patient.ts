@@ -13,5 +13,19 @@ export type Patient = {
 }
 
 export function isAdult(birthdate: string): boolean {
-  return new Date().getFullYear() - new Date(birthdate).getFullYear() >= 18;
+  const parsed = new Date(birthdate);
+
+  if (isNaN(parsed.getTime())) return false;
+
+  const today = new Date();
+  let age = today.getFullYear() - parsed.getFullYear();
+
+  const monthDiff = today.getMonth() - parsed.getMonth();
+  const dayDiff = today.getDate() - parsed.getDate();
+
+  if (monthDiff < 0 || (monthDiff === 0 && dayDiff < 0)) {
+    age--;
+  }
+
+  return age >= 18;
 }
