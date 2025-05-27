@@ -1,24 +1,15 @@
-import { User } from "../models/User";
-import { IUserReadRepository } from "../contracts/Repositories/User/IUserReadRepository";
-import { IUserWriteRepository } from "../contracts/Repositories/User/IUserWriteRepository";
+import { BaseRepository } from "./BaseRepository";
+import { IUserRepository } from "../contracts/Repositories/IUserRepository";
 import { Knex } from "knex";
+import { User } from "../models/user";
 
-export class UserRepository implements IUserReadRepository, IUserWriteRepository{
-    private db: Knex;
-
-    constructor(db: Knex) {
-        this.db = db;
+export class UserRepository extends BaseRepository<User> implements IUserRepository{
+    constructor(db: Knex){
+        super(db, 'users');
     }
 
-    async create(user_data: Omit<User, 'id'>): Promise<User> {
-        const [row] = await this.db('users').insert(user_data)
-                                            .returning(['id', 'email', 'password'])
-        
-        return new User(row.id, row.email, row.password);
-    }
-    
     async findByEmail(email: string): Promise<User | null> {
-        const user = await this.db('users').where({ email }).first();
-        return user ? new User(user.id, user.email, user.password) : null;
+        const patient = await this.db(this.table).where({email}).first();
+        return patient ?? null;
     }
 }
