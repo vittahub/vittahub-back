@@ -1,10 +1,10 @@
-import { ClinicRegisterRequest} from "src/contracts/Requests/AuthRequests";
-import { ClinicRepository } from "src/repositories/ClinicRepository";
-import { UserRepository } from "src/repositories/UserRepository";
+import { ClinicRegisterRequest} from "../../src/contracts/Requests/AuthRequests";
+import { ClinicRepository } from "../../src/repositories/ClinicRepository";
+import { UserRepository } from "../../src/repositories/UserRepository";
 import { Request, Response } from "express";
-import { ClinicRegisterResponse } from "src/contracts/Responses/AuthResponses";
+import { ClinicRegisterResponse } from "../../src/contracts/Responses/AuthResponses";
 import bcrypt from 'bcryptjs';
-import toClinicRegisterResponse from "src/helpers/responseMapping/toClinicRegisterResponse";
+import toClinicRegisterResponse from "../../src/helpers/responseMapping/toClinicRegisterResponse";
 
 export class ClinicController{
     constructor(
