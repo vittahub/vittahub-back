@@ -14,7 +14,7 @@ const clinicController = new ClinicController(userRepository,
                                               new ClinicRepository(db),
                                               new SpecialistRepository(db))
 
-clinicRoutes.post('specialists',
+clinicRoutes.post('/specialists',
                   validate(SpecialistRegisterSchema),
                   asyncHandler(clinicController.registerSpecialist));
 
