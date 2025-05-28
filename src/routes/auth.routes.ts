@@ -13,13 +13,16 @@ import { PatientRepository } from '../repositories/PatientRepository';
 import { ClinicRegisterSchema } from '../middleware/validationSchemes/authDTO/ClinicRegister';
 import { ClinicController } from '../controllers/ClinicController';
 import { ClinicRepository } from '../repositories/ClinicRepository';
+import { SpecialistRepository } from '../repositories/SpecialistRepository';
 
 const userRepository = new UserRepository(db);
 
 const authRoutes = Router();
 const authController = new AuthController(userRepository)
 const patientController = new PatientController(userRepository, new PatientRepository(db))
-const clinicController = new ClinicController(userRepository, new ClinicRepository(db))
+const clinicController = new ClinicController(userRepository,
+                                              new ClinicRepository(db),
+                                              new SpecialistRepository(db))
 
 authRoutes.post('/register/patient',
                 validate(PatientRegisterSchema),

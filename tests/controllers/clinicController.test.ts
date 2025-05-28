@@ -1,3 +1,4 @@
+import { createSpecialistMockRepository } from "../mocks/MockSpecialistRepository";
 import { ClinicController } from "../../src/controllers/ClinicController"
 import { createClinicMockRepository } from "../mocks/MockClinicRepository"
 import { createUserMockRepository } from "../mocks/MockUserRepository"
@@ -9,9 +10,10 @@ jest.mock('../../src/helpers/responseMapping/toClinicRegisterResponse');
 describe('clinic controller', () => {
     const userRepository = createUserMockRepository()
     const clinicRepository = createClinicMockRepository()
-    const clinicController = new ClinicController(userRepository, clinicRepository)
+    const specialistRepository = createSpecialistMockRepository()
+    const clinicController = new ClinicController(userRepository, clinicRepository, specialistRepository)
 
-    const req = {
+    const clinicRegisterReq = {
         body: {
             name: "clinica do jose",
             email: "clinicajose@email.com",
@@ -31,6 +33,19 @@ describe('clinic controller', () => {
         } 
     } as any
 
+    const specialistRegisterReq = {
+      body: {
+        name: 'leon',
+        email: 'leon@email.com',
+        password: 'MyPassword',
+        password_confirmation: 'MyPassword',
+        clinic_id: 123,
+        role: 'specialist',
+        speciality: 'cardiologist',
+        phone: '8899610940'
+      }
+    } as any
+
     beforeEach(() => {
         jest.clearAllMocks();
         (bcrypt.hash as jest.Mock).mockResolvedValue("MyHashedPassword");
@@ -41,7 +56,7 @@ describe('clinic controller', () => {
     const status = jest.fn(() => ({ json }));
     const res = { status, json } as any;
 
-    await clinicController.registerClinic(req, res);
+    await clinicController.registerClinic(clinicRegisterReq, res);
 
     expect(userRepository.findByEmail).toHaveBeenCalledWith('clinicajose@email.com');
     expect(bcrypt.hash).toHaveBeenCalledWith('MyPassword', 10)
@@ -65,4 +80,27 @@ describe('clinic controller', () => {
       whatsapp: "88993651236",
     });
   }); 
+
+  it('should register a new specialist on the clinic', async() => {
+    const json = jest.fn();
+    const status = jest.fn(() => ({ json }));
+    const res = { status, json } as any;
+
+    await clinicController.registerSpecialist(specialistRegisterReq, res);
+
+    expect(userRepository.findByEmail).toHaveBeenCalledWith('leon@email.com');
+    expect(bcrypt.hash).toHaveBeenCalledWith('MyPassword', 10)
+    expect(userRepository.create).toHaveBeenCalledWith({
+      email: 'leon@email.com',
+      password: 'MyHashedPassword',
+      role: 'specialist',
+    });
+    expect(specialistRepository.create).toHaveBeenCalledWith({
+      user_id: 123,
+      clinic_id: 123,
+      name: 'leon',
+      speciality: 'cardiologist',
+      phone: '8899610940',
+    })
+  });
 })
