@@ -1,12 +1,12 @@
 import { Router, Response } from 'express';
-import { ClinicController } from 'src/controllers/ClinicController';
-import db from 'src/database/connection';
-import { asyncHandler } from 'src/helpers/asyncHandler';
-import { validate } from 'src/middleware/validate';
-import { SpecialistRegisterSchema } from 'src/middleware/validationSchemes/authDTO/SpecialistRegister';
-import { ClinicRepository } from 'src/repositories/ClinicRepository';
-import { SpecialistRepository } from 'src/repositories/SpecialistRepository';
-import { UserRepository } from 'src/repositories/UserRepository';
+import { ClinicController } from '../controllers/ClinicController';
+import db from '../database/connection';
+import { asyncHandler } from '../helpers/asyncHandler';
+import { validate } from '../middleware/validate';
+import { SpecialistRegisterSchema } from '../middleware/validationSchemes/authDTO/SpecialistRegister';
+import { ClinicRepository } from '../repositories/ClinicRepository';
+import { SpecialistRepository } from '../repositories/SpecialistRepository';
+import { UserRepository } from '../repositories/UserRepository';
 
 const clinicRoutes = Router()
 const userRepository = new UserRepository(db);
