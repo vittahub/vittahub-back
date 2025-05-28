@@ -1,4 +1,4 @@
-import { Address } from "src/types/address";
+import { Address } from "../types/address";
 
 export type Clinic = {
     user_id: number;

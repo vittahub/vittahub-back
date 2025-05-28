@@ -1,6 +1,6 @@
-import { ClinicRegisterResponse } from "src/contracts/Responses/AuthResponses";
-import { Clinic } from "src/models/clinic";
-import { User } from "src/models/user";
+import { ClinicRegisterResponse } from "../../contracts/Responses/AuthResponses";
+import { Clinic } from "../../models/clinic";
+import { User } from "../../models/user";
 
 export default function toClinicRegisterResponse
 (user_data: User, clinic_data: Clinic): ClinicRegisterResponse{

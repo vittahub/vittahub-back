@@ -10,9 +10,9 @@ import authMiddleware from '../middleware/authMiddleware';
 import { PatientRegisterSchema } from '../middleware/validationSchemes/authDTO/PatientRegister';
 import { UserRepository } from '../repositories/UserRepository';
 import { PatientRepository } from '../repositories/PatientRepository';
-import { ClinicRegisterSchema } from 'src/middleware/validationSchemes/authDTO/ClinicRegister';
-import { ClinicController } from 'src/controllers/ClinicController';
-import { ClinicRepository } from 'src/repositories/ClinicRepository';
+import { ClinicRegisterSchema } from '../middleware/validationSchemes/authDTO/ClinicRegister';
+import { ClinicController } from '../controllers/ClinicController';
+import { ClinicRepository } from '../repositories/ClinicRepository';
 
 const userRepository = new UserRepository(db);
 
