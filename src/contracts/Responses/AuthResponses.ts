@@ -16,6 +16,17 @@ interface PatientRegisterSucessResponse {
     cpf: string
 }
 
+interface ClinicRegisterSuccessResponse {
+    id: number,
+    name: string,
+    email: string,
+    role: Role,
+    cnpj: string,
+    address: Address,
+    phone: string, 
+    whatsapp: string | null,
+}
+
 export interface UserResponse {
     id: number;
     email: string
@@ -32,5 +43,6 @@ export interface LoginSuccessResponse {
 }
 
 export type PatientRegisterResponse = PatientRegisterSucessResponse | ErrorResponse;
+export type ClinicRegisterResponse = ClinicRegisterSuccessResponse | ErrorResponse;
 export type LoginResponse = LoginSuccessResponse | ErrorResponse;
 
