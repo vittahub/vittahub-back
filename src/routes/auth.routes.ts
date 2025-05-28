@@ -10,14 +10,24 @@ import authMiddleware from '../middleware/authMiddleware';
 import { PatientRegisterSchema } from '../middleware/validationSchemes/authDTO/PatientRegister';
 import { UserRepository } from '../repositories/UserRepository';
 import { PatientRepository } from '../repositories/PatientRepository';
+import { ClinicRegisterSchema } from 'src/middleware/validationSchemes/authDTO/ClinicRegister';
+import { ClinicController } from 'src/controllers/ClinicController';
+import { ClinicRepository } from 'src/repositories/ClinicRepository';
+
+const userRepository = new UserRepository(db);
 
 const authRoutes = Router();
-const authController = new AuthController(new UserRepository(db))
-const patientController = new PatientController(new UserRepository(db), new PatientRepository(db))
+const authController = new AuthController(userRepository)
+const patientController = new PatientController(userRepository, new PatientRepository(db))
+const clinicController = new ClinicController(userRepository, new ClinicRepository(db))
 
 authRoutes.post('/register/patient',
                 validate(PatientRegisterSchema),
                 asyncHandler(patientController.registerPatient));
+
+authRoutes.post('/register/clinic',
+                validate(ClinicRegisterSchema),
+                asyncHandler(clinicController.registerClinic)) 
 
 authRoutes.post('/login', asyncHandler(authController.login));
 
