@@ -37,6 +37,16 @@ interface SpecialistRegisterSuccessResponse {
     phone: string,
 }
 
+interface EmployeeRegisterSuccessResponse {
+    id:number,
+    clinic_id: number,
+    name: string,
+    email: string,
+    role: Role,
+    function: string,
+    phone: string,
+}
+
 export interface UserResponse {
     id: number;
     email: string
@@ -55,5 +65,6 @@ export interface LoginSuccessResponse {
 export type PatientRegisterResponse = PatientRegisterSucessResponse | ErrorResponse;
 export type ClinicRegisterResponse = ClinicRegisterSuccessResponse | ErrorResponse;
 export type SpecialistRegisterResponse = SpecialistRegisterSuccessResponse | ErrorResponse;
+export type EmployeeRegisterResponse = EmployeeRegisterSuccessResponse | ErrorResponse;
 export type LoginResponse = LoginSuccessResponse | ErrorResponse;
 
