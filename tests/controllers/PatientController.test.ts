@@ -1,11 +1,11 @@
-import { PatientController } from "../../src/controllers/PatientController";
+import { PatientController } from "../../src/modules/patient/PatientController";
 import bcrypt from "bcryptjs";
 import { createPatientMockRepository } from "../mocks/MockPatientRepository";
 import { createUserMockRepository } from "../mocks/MockUserRepository";
 
 
 jest.mock('bcryptjs');
-jest.mock('../../src/helpers/responseMapping/toPatientRegisterResponse');
+jest.mock('../../src/modules/patient/middleware/PatientRegisterMapper');
 
 describe('patient controller', () => {
   const userRepository = createUserMockRepository();

@@ -1,4 +1,4 @@
-import isValidCPF from '../../src/helpers/cpfValidation';
+import isValidCPF from '../../src/modules/patient/helpers/cpfValidation';
 
 describe('isValidCPF', () => {
   it('should return true for a valid cpf with formatting', () => {

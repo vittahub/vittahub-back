@@ -1,6 +1,6 @@
-import { UserRepository } from "../../src/repositories/UserRepository";
 import { createUserMockKnex } from "../mocks/UserMockKnex";
-import { Role } from "../../src/types/Enums";
+import { Role } from "../../src/shared/types/Enums";
+import { UserRepository } from "../../src/modules/auth/repositories/UserRepository";
 
 
 describe("User Repository", () => {

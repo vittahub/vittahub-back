@@ -1,6 +1,9 @@
 import { Router } from 'express';
-import authRoutes from './routes/auth.routes';
-import clinicRoutes from './routes/clinic.routes';
+import authRoutes from './modules/auth/auth.routes';
+import patientRoutes from './modules/patient/patient.routes';
+import specialistRoutes from './modules/specialist/specialist.routes';
+import employeeRoutes from './modules/employee/employee.routes';
+import clinicRoutes from './modules/clinic/clinic.routes';
 
 const router = Router();
 
@@ -14,5 +17,8 @@ router.get('/', (req, res) => {
 
 router.use('/auth', authRoutes)
 router.use('/clinic', clinicRoutes)
+router.use('/patient', patientRoutes)
+router.use('/specialist', specialistRoutes)
+router.use('/employee', employeeRoutes)
 
 export default router;

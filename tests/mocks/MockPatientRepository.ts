@@ -1,4 +1,4 @@
-import { PatientRepository } from "../../src/repositories/PatientRepository";
+import { PatientRepository } from "../../src/modules/patient/repositories/PatientRepository";
 
 export const createPatientMockRepository = (): jest.Mocked<PatientRepository> => {
   const patientRepository = new PatientRepository({} as any)

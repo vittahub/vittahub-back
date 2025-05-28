@@ -1,4 +1,4 @@
-import { SpecialistRepository } from "../../src/repositories/SpecialistRepository";
+import { SpecialistRepository } from "../../src/modules/specialist/repositories/SpecialistRepository";
 
 export const createSpecialistMockRepository = (): jest.Mocked<SpecialistRepository> => {
   const specialistRepository = new SpecialistRepository({} as any)
