@@ -59,6 +59,7 @@ export interface EmployeeRegisterRequest {
   email: string;
   password: string;
   password_confirmation: string;
+  clinic_id: number
   role: Enums.Role
   function: string;
   phone: string;
