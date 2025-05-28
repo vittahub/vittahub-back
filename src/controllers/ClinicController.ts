@@ -1,14 +1,16 @@
-import { ClinicRegisterRequest, SpecialistRegisterRequest} from "../../src/contracts/Requests/AuthRequests";
+import { ClinicRegisterRequest, EmployeeRegisterRequest, SpecialistRegisterRequest} from "../../src/contracts/Requests/AuthRequests";
 import { ClinicRepository } from "../../src/repositories/ClinicRepository";
 import { UserRepository } from "../../src/repositories/UserRepository";
 import { Request, Response } from "express";
-import { ClinicRegisterResponse, SpecialistRegisterResponse } from "../../src/contracts/Responses/AuthResponses";
+import { ClinicRegisterResponse, EmployeeRegisterResponse, SpecialistRegisterResponse } from "../../src/contracts/Responses/AuthResponses";
 import bcrypt from 'bcryptjs';
 import toClinicRegisterResponse from "../../src/helpers/responseMapping/toClinicRegisterResponse";
 import { SpecialistRepository } from "../repositories/SpecialistRepository";
 import toSpecialistRegisterResponse from "../helpers/responseMapping/toSpecialistRegisterResponse";
 import { User } from "../models/user";
 import { Role } from "../types/Enums";
+import { EmployeeRepository } from "../repositories/EmployeeRepository";
+import toEmployeeRegisterResponse from "../helpers/responseMapping/toEmployeeRegisterResponse";
 
 
 
@@ -16,7 +18,8 @@ export class ClinicController{
     constructor(
         private userRepository: UserRepository,
         private clinicRepository: ClinicRepository,
-        private specialistRepository: SpecialistRepository
+        private specialistRepository: SpecialistRepository,
+        private employeeRepository: EmployeeRepository
     ){}
     
     private async createUser(email: string, password: string, role: Role): Promise <User| null> {
@@ -83,5 +86,31 @@ export class ClinicController{
 
         const specialistRegisterResponse = toSpecialistRegisterResponse(user, specialist);
         return res.status(201).json(specialistRegisterResponse)
+    }
+
+    registerEmployee = async (
+        req: Request<{}, {}, EmployeeRegisterRequest>,
+        res: Response<EmployeeRegisterResponse>
+    ) => {
+        const req_body: EmployeeRegisterRequest = req.body;
+
+        const user = await this.createUser(req_body.email, req_body.password, req_body.role);
+        if (!user) return res.status(400).json({ error: 'User already exists' });
+
+        const employee = await this.employeeRepository.create({
+            user_id: user.id,
+            clinic_id: req_body.clinic_id,
+            name: req_body.name,
+            function: req_body.function,
+            phone: req_body.phone
+        });
+
+        if(!user || !employee){
+            this.userRepository.delete(user.id);
+            return res.status(500).json({ error: 'Occured a error during user creation'});
+        }
+
+        const employeeRegisterResponse = toEmployeeRegisterResponse(user, employee);
+        return res.status(201).json(employeeRegisterResponse)
     }
 }
