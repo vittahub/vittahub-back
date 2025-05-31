@@ -3,14 +3,15 @@ import bcrypt from 'bcryptjs';
 
 import { PatientRepository } from './repositories/PatientRepository';
 import toPatientRegisterResponse from './middleware/PatientRegisterMapper';
-import { UserRepository } from '../auth/repositories/UserRepository';
 import { PatientRegisterRequest } from './dto/PatientRequests';
 import { PatientRegisterResponse } from './dto/PatientResponses';
+import { IUserRepository } from '../auth/repositories/IUserRepository';
+import { IPatientRepository } from './repositories/IPatientRepository';
 
 export class PatientController {
   constructor(
-    private userRepository: UserRepository,
-    private patientsRepository: PatientRepository     
+    private userRepository: IUserRepository,
+    private patientsRepository: IPatientRepository     
   ){}
 
   registerPatient = async (

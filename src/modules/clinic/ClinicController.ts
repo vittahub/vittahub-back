@@ -2,11 +2,7 @@ import bcrypt from 'bcryptjs';
 import { Request, Response } from 'express';
 
 import { Role } from "../../shared/types/Enums";
-import { UserRepository } from "../auth/repositories/UserRepository";
 import { User } from "../auth/UserModel";
-import { ClinicRepository } from "./repositories/ClinicRepository";
-import { EmployeeRepository } from "../employee/repositories/EmployeeRepository";
-import { SpecialistRepository } from "../specialist/repositories/SpecialistRepository";
 import toClinicRegisterResponse from './middleware/ClinicRegisterMapper';
 import toSpecialistRegisterResponse from '../specialist/middleware/SpecialistRegisterMapper';
 import toEmployeeRegisterResponse from '../employee/middleware/EmployeeRegisterMapper';
@@ -16,15 +12,19 @@ import { SpecialistRegisterRequest } from '../specialist/dto/SpecialistsRequests
 import { SpecialistRegisterResponse } from '../specialist/dto/SpecialistsResponses';
 import { ClinicRegisterRequest } from './dto/ClinicRequests';
 import { ClinicRegisterResponse } from './dto/ClinicResponse';
+import { IUserRepository } from '../auth/repositories/IUserRepository';
+import { IEmployeeRepository } from '../employee/repositories/IEmployeeRepository';
+import { ISpecialistRepository } from '../specialist/repositories/ISpecialistRepository';
+import { IClinicRepository } from './repositories/IClinicRepository';
 
 export class ClinicController{
     constructor(
-        private userRepository: UserRepository,
-        private clinicRepository: ClinicRepository,
-        private specialistRepository: SpecialistRepository,
-        private employeeRepository: EmployeeRepository
+        private userRepository: IUserRepository,
+        private clinicRepository: IClinicRepository,
+        private specialistRepository: ISpecialistRepository,
+        private employeeRepository: IEmployeeRepository
     ){}
-    
+
     private async createUser(email: string, password: string, role: Role): Promise <User| null> {
         const userExists = await this.userRepository.findByEmail(email);
         if (userExists) return null;

@@ -3,13 +3,13 @@ import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 
 import { LoginRequest } from './dto/AuthRequests';
-import { UserRepository } from './repositories/UserRepository';
 import { LoginResponse, UserResponse } from './dto/AuthResponse';
 import { toUserResponse } from './middleware/UserRegisterMapper';
+import { IUserRepository } from './repositories/IUserRepository';
 
 export class AuthController {
   constructor(
-    private userRepository: UserRepository,
+    private userRepository: IUserRepository,
   ){}
   
   login = async (
