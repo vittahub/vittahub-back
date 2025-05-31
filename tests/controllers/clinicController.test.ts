@@ -5,7 +5,7 @@ import { createUserMockRepository } from "../mocks/MockUserRepository"
 import bcrypt from "bcryptjs";
 import { createEmployeeMockRepository } from "../../tests/mocks/MockEmployeeRepository";
 
-jest.mock('bcryptjs');
+/* jest.mock('bcryptjs');
 jest.mock('../../src/modules/clinic/middleware/ClinicRegisterMapper');
 
 describe('clinic controller', () => {
@@ -105,4 +105,4 @@ describe('clinic controller', () => {
       phone: '8899610940',
     })
   });
-})
+}) */

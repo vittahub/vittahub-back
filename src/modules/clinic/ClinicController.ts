@@ -12,7 +12,7 @@ import { ClinicRegisterResponse } from './dto/ClinicResponse';
 import { IEmployeeRepository } from '../employee/repositories/IEmployeeRepository';
 import { ISpecialistRepository } from '../specialist/repositories/ISpecialistRepository';
 import { IClinicRepository } from './repositories/IClinicRepository';
-import { UserService } from 'src/shared/services/EntityCreation';
+import { UserService } from '../../shared/services/EntityCreation';
 
 export class ClinicController{
     constructor(

@@ -4,7 +4,7 @@ import toPatientRegisterResponse from './middleware/PatientRegisterMapper';
 import { PatientRegisterRequest } from './dto/PatientRequests';
 import { PatientRegisterResponse } from './dto/PatientResponses';
 import { IPatientRepository } from './repositories/IPatientRepository';
-import { UserService } from 'src/shared/services/EntityCreation';
+import { UserService } from '../../shared/services/EntityCreation';
 
 export class PatientController {
   constructor(

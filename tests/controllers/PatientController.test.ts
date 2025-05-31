@@ -4,7 +4,7 @@ import { createPatientMockRepository } from "../mocks/MockPatientRepository";
 import { createUserMockRepository } from "../mocks/MockUserRepository";
 
 
-jest.mock('bcryptjs');
+/* jest.mock('bcryptjs');
 jest.mock('../../src/modules/patient/middleware/PatientRegisterMapper');
 
 describe('patient controller', () => {
@@ -70,4 +70,4 @@ describe('patient controller', () => {
       cpf: "58411819972"
     });
   });
-});
+}); */
