@@ -4,6 +4,7 @@ import { Response } from 'express';
 import { IUserRepository } from "../../modules/auth/repositories/IUserRepository";
 import { Role } from "../types/Enums";
 import { User } from "../../modules/auth/UserModel";
+import db from '../../database/connection';
 
 export class UserService {
     constructor(private userRepository: IUserRepository) {}
@@ -28,14 +29,17 @@ export class UserService {
         onSuccess: (user: User, entity: T) => unknown,
         res: Response
     ){
-        const user = await this.__createUser(email, password, role);
-        if (!user) return res.status(400).json({ error: 'User already exists' });
+        await db.transaction(async (trx) => {
+            const user = await this.__createUser(email, password, role);
+            if (!user) return res.status(400).json({ error: 'User already exists' });
 
-        const entity = await createEntity(user.id);
-        if(!entity) {
-            await this.userRepository.delete(user.id);
-            return res.status(500).json({ error: 'Entity creation failed' });
-        }
-        return res.status(201).json(onSuccess(user, entity));
+            const entity = await createEntity(user.id);
+            if(!entity) {
+
+                return res.status(500).json({ error: 'Entity creation failed' });
+            }
+            return res.status(201).json(onSuccess(user, entity));            
+        });
+
     }
 }
