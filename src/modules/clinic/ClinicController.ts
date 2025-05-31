@@ -56,8 +56,8 @@ export class ClinicController{
             whatsapp: req_body.whatsapp ?? null,
         })
 
-        if(!user || !clinic){
-            this.userRepository.delete(user.id)
+        if(!clinic){
+            await this.userRepository.delete(user.id)
             return res.status(500).json({ error: 'Occured a error during user creation'});
         }
 
@@ -82,8 +82,8 @@ export class ClinicController{
             phone: req_body.phone
         });
 
-        if(!user || !specialist){
-            this.userRepository.delete(user.id);
+        if(!specialist){
+            await this.userRepository.delete(user.id);
             return res.status(500).json({ error: 'Occured a error during user creation'});
         }
 
@@ -108,8 +108,8 @@ export class ClinicController{
             phone: req_body.phone
         });
 
-        if(!user || !employee){
-            this.userRepository.delete(user.id);
+        if(!employee){
+            await this.userRepository.delete(user.id);
             return res.status(500).json({ error: 'Occured a error during user creation'});
         }
 

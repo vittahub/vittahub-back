@@ -40,7 +40,7 @@ export class PatientController {
       cpf: req_body.cpf
     })
 
-    if(!user || !patient){
+    if(!patient){
       await this.userRepository.delete(user.id);
       return res.status(500).json({ error: 'Occured a error during user creation'});
     }
