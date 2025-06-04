@@ -10,8 +10,9 @@ export abstract class BaseRepository<T> implements IBaseRepository<T>{
         this.table = table;
     }
 
-    async create(data: Omit<T, "id">): Promise<T> {
-        const [row] = await this.db(this.table).insert(data)
+    async create(data: Omit<T, "id">, trx?: Knex.Transaction): Promise<T> {
+        const query =  trx ?? this.db
+        const [row] = await query(this.table).insert(data)
                                                .returning("*")
         return row
     }

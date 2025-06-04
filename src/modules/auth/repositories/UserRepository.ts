@@ -8,8 +8,9 @@ export class UserRepository extends BaseRepository<User> implements IUserReposit
         super(db, 'users');
     }
 
-    async findByEmail(email: string): Promise<User | null> {
-        const patient = await this.db(this.table).where({email}).first();
+    async findByEmail(email: string, trx?: Knex.Transaction): Promise<User | null> {
+        const query = trx ?? this.db 
+        const patient = await query(this.table).where({email}).first();
         return patient ?? null;
     }
 }
