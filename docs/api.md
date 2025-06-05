@@ -2,86 +2,69 @@
 
 - [VittaHub API](#vittahub-api)
   - [Auth Routes](#auth-routes)
-    - [Auth Register](#auth-register)
-        - [Auth Pacient Register Request](#auth-pacient-register-request)
-        - [Auth Pacient Register Response](#auth-pacient-register-response)
-        - [Auth Clinic Register Request](#auth-clinic-register-request)
-        - [Auth Clinic Register Response](#auth-clinic-register-response)
-    - [Clinic Employee Register](#clinic-employee-register)
+    - [Login](#login)
+        - [Login Request](#login-request)
+        - [Login Response](#login-response)
+  - [Clinic Routes](#clinic-routes)
+    - [Clinic Register](#clinic-register)
+        - [Clinic Register Request](#clinic-register-request)
+        - [Clinic Register Response](#clinic-register-response)
+    - [Specialist Register](#specialist-register)
         - [Specialist Register Request](#specialist-register-request)
         - [Specialist Register Response](#specialist-register-response)
+    - [Employee Register](#employee-register)
         - [Employee Register Request](#specialist-register-request)
         - [Employee Register Response](#specialist-register-response)
-    - [Auth Login](#auth-login)
-        - [Auth Login Request](#auth-login-request)
-        - [Auth Login Response](#auth-login-response)
+  - [Patient Routes](#patient-routes)
+    - [Patient Register](#patient-register)
+        - [Pacient Register Request](#pacient-register-request)
+        - [Pacient Register Response](#pacient-register-response)
+
         
 
 ## Auth Routes
 
-### Auth Register
+### Login
 
-#### Auth Pacient Register Request
+#### Login Request
 
 ```js
-POST /auth/register/patient
+POST /auth/login
 ```
 
 ```json
 {
-    "name" : "jose",
-    "email": "jose@email.com",
+    "email": "myemail@email.com",
     "password": "MyPassword",
-    "password_confirmation" : "MyPassword",
-    "role": "patient",
-    "birthdate": "05/11/2001",
-    "sex": "male",
-    "address": {
-        "street": "R. Jaime Leonel Chaves",
-        "number": "2134",
-        "country": "Brazil",
-        "city": "Limoeiro Do Norte",
-        "zip_code": "6293000"
-    },
-    "phone_1": "88998765432",
-    "phone_2": null,
-    "cpf": "36938081042"
+    "role": "patient"
 }
 ```
 
-#### Auth Pacient Register Response
+#### Login Response
 
 ```js
-201 Created
+200 Ok 
 ```
 
 ```json
 {
-    "user": {
-        "id" : 17,
-        "name" : "jose",
-        "email": "jose@email.com",
-        "role": "patient",
-        "birthdate": "2001-11-05",
-        "sex": "male",
-        "address": {
-            "street": "R. Jaime Leonel Chaves",
-            "number": "2134",
-            "country": "Brazil",
-            "city": "Limoeiro Do Norte",
-            "zip_code": "6293000"
-        },
-        "phone_1": "88998765432",
-        "phone_2": null,
-        "cpf": "36938081042"
-    }
+  "user": {
+    "id": 17,
+    "email": "myemail@email.com"
+  },
+  "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTYsImlhdCI6MTc0NzU5NTk4MywiZXhwIjoxNzQ3NjgyMzgzfQ.csh8Q111BTtOg8CrfzGSSV3XtvzPgCpPkU6Z3QRR6QE"
 }
 ```
 
-#### Auth Clinic Register Request
+## Clinic Routes
+
+### Clinic Register
+
+#### Clinic Register Request
+
 
 ```js
-POST /auth/register/clinic
+POST /clinic/register
 ```
 
 ```json
@@ -104,7 +87,7 @@ POST /auth/register/clinic
 }
 ```
 
-#### Auth Clinic Register Response
+#### Clinic Register Response
 
 ```js
 201 Created
@@ -129,7 +112,7 @@ POST /auth/register/clinic
 }
 ```
 
-### Clinic Employee Register
+### Specialist Register
 
 #### Specialist Register Request
 
@@ -168,6 +151,8 @@ POST /clinic/specialists
 }
 ```
 
+### Employee Register
+
 #### Employee Register Request
 
 ```js
@@ -186,7 +171,7 @@ POST /clinic/employees
 }
 ```
 
-#### Employee Register Response
+#### employee Register Response
 
 ```js
 201 Created
@@ -204,32 +189,63 @@ POST /clinic/employees
 }
 ```
 
-### Auth Login
+## Patient Routes
 
-#### Auth Login Request
+### Patient Register
+
+#### Patient Register Request
+
 ```js
-POST /auth/login
+POST /patient/register
 ```
 
 ```json
 {
-    "email": "myemail@email.com",
+    "name" : "jose",
+    "email": "jose@email.com",
     "password": "MyPassword",
-    "role": "patient"
+    "password_confirmation" : "MyPassword",
+    "role": "patient",
+    "birthdate": "05/11/2001",
+    "sex": "male",
+    "address": {
+        "street": "R. Jaime Leonel Chaves",
+        "number": "2134",
+        "country": "Brazil",
+        "city": "Limoeiro Do Norte",
+        "zip_code": "6293000"
+    },
+    "phone_1": "88998765432",
+    "phone_2": null,
+    "cpf": "36938081042"
 }
 ```
 
-#### Auth Login Response
+#### Patient Register Response
+
 ```js
-200 Ok 
+201 Created
 ```
 
 ```json
 {
-  "user": {
-    "id": 17,
-    "email": "myemail@email.com"
-  },
-  "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTYsImlhdCI6MTc0NzU5NTk4MywiZXhwIjoxNzQ3NjgyMzgzfQ.csh8Q111BTtOg8CrfzGSSV3XtvzPgCpPkU6Z3QRR6QE"
+    "user": {
+        "id" : 17,
+        "name" : "jose",
+        "email": "jose@email.com",
+        "role": "patient",
+        "birthdate": "2001-11-05",
+        "sex": "male",
+        "address": {
+            "street": "R. Jaime Leonel Chaves",
+            "number": "2134",
+            "country": "Brazil",
+            "city": "Limoeiro Do Norte",
+            "zip_code": "6293000"
+        },
+        "phone_1": "88998765432",
+        "phone_2": null,
+        "cpf": "36938081042"
+    }
 }
 ```

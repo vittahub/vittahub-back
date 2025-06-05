@@ -1,0 +1,10 @@
+import { BaseRepository } from "../../../shared/repositories/BaseRepository";
+import { Clinic } from "../ClinicModel";
+import { IClinicRepository } from "./IClinicRepository";
+import { Knex } from "knex";
+
+export class ClinicRepository extends BaseRepository<Clinic> implements IClinicRepository {
+    constructor (db: Knex){
+        super(db, 'clinics');
+    }
+}
