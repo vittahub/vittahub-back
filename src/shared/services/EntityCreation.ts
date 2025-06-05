@@ -6,7 +6,6 @@ import { Role } from "../types/Enums";
 import { User } from "../../modules/auth/UserModel";
 import db from '../../database/connection';
 import { Knex } from 'knex';
-import { error } from 'console';
 
 export class UserService {
     constructor(public userRepository: IUserRepository) {}

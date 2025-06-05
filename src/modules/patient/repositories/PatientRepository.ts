@@ -1,7 +1,7 @@
 import { IPatientRepository } from "./IPatientRepository";
 import { Knex } from "knex";
 import { Patient } from "../PatientModel";
-import { UserBoundRepository } from "src/shared/repositories/UserBoundRepository";
+import { UserBoundRepository } from "../../../shared/repositories/UserBoundRepository";
 
 export class PatientRepository extends UserBoundRepository<Patient> implements IPatientRepository{
     constructor(db: Knex){

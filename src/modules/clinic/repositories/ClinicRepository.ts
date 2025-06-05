@@ -1,4 +1,4 @@
-import { UserBoundRepository } from "src/shared/repositories/UserBoundRepository";
+import { UserBoundRepository } from "../../../shared/repositories/UserBoundRepository";
 import { Clinic } from "../ClinicModel";
 import { IClinicRepository } from "./IClinicRepository";
 import { Knex } from "knex";

@@ -11,7 +11,7 @@ router.get('/', (req, res) => {
   res.send({
     message: "Welcome to VittaHub's API",
     repositoryUrl: "https://github.com/vittahub/vittahub-back.git",
-    documentation: {}
+    documentation: "https://github.com/vittahub/vittahub-back/blob/main/docs/api.md"
   });
 });
 

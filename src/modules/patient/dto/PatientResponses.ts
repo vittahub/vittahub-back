@@ -1,4 +1,4 @@
-import { ErrorResponse } from "src/shared/errors/ErrorResponse";
+import { ErrorResponse } from "../../../shared/errors/ErrorResponse";
 import { Address } from "../../../shared/types/address";
 import { Role, Sex } from "../../../shared/types/Enums";
 

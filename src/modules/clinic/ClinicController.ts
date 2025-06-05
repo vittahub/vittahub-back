@@ -15,7 +15,6 @@ import { IClinicRepository } from './repositories/IClinicRepository';
 import { UserService } from '../../shared/services/EntityCreation';
 import { ClinicUpdateRequest } from './dto/ClinicUpdateRequest';
 import { ClinicUpdateResponse } from './dto/ClinicUpdateResponse';
-import { number } from 'zod';
 
 export class ClinicController{
     constructor(
