@@ -11,6 +11,7 @@ import { EmployeeRepository } from '../employee/repositories/EmployeeRepository'
 import { SpecialistRepository } from '../specialist/repositories/SpecialistRepository';
 import { ClinicRegisterSchema } from './validators/clinic.scheme';
 import { UserService } from '../../shared/services/EntityCreation';
+import { ClinicUpdateSchema } from './validators/clinicUpdate.scheme';
 
 const clinicRoutes = Router()
 const clinicController = new ClinicController(new UserService(new UserRepository(db)),
@@ -20,7 +21,11 @@ const clinicController = new ClinicController(new UserService(new UserRepository
 
 clinicRoutes.post('/register',
                 validate(ClinicRegisterSchema),
-                asyncHandler(clinicController.registerClinic));                              
+                asyncHandler(clinicController.registerClinic));
+                
+clinicRoutes.put('/update/:id',
+                validate(ClinicUpdateSchema),
+                asyncHandler(clinicController.updateClinic))
 
 clinicRoutes.post('/specialists',
                   validate(SpecialistRegisterSchema),

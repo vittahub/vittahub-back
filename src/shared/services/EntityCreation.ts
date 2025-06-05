@@ -6,9 +6,10 @@ import { Role } from "../types/Enums";
 import { User } from "../../modules/auth/UserModel";
 import db from '../../database/connection';
 import { Knex } from 'knex';
+import { error } from 'console';
 
 export class UserService {
-    constructor(private userRepository: IUserRepository) {}
+    constructor(public userRepository: IUserRepository) {}
 
     async __createUser(
         email: string,
@@ -46,5 +47,27 @@ export class UserService {
             return res.status(201).json(onSuccess(user, entity));            
         });
 
+    }
+
+    async UpdateWithUser<T>(
+        userId: number,
+        userUpdate: Partial<Omit<User, 'id'>>,
+        entityUpdate: (userId: number, trx: Knex.Transaction) => Promise<T | null>,
+        onSuccess: (user: User, entity: T) => unknown,
+        res: Response
+    ) {
+        await db.transaction(async (trx) => {
+            const user = await this.userRepository.update(userId, userUpdate, trx);
+            if(!user) {
+                return res.status(404).json({error: "user not found"});
+            }
+
+            const entity = await entityUpdate(userId, trx);
+            if(!entity) {
+                return res.status(500).json({error: "entity failed to update"});
+            }
+
+            return res.status(200).json(onSuccess(user, entity));
+        });
     }
 }

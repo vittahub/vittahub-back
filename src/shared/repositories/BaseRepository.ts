@@ -13,7 +13,7 @@ export abstract class BaseRepository<T> implements IBaseRepository<T>{
     async create(data: Omit<T, "id">, trx?: Knex.Transaction): Promise<T> {
         const query =  trx ?? this.db
         const [row] = await query(this.table).insert(data)
-                                               .returning("*")
+                                             .returning("*")
         return row
     }
 
@@ -26,10 +26,11 @@ export abstract class BaseRepository<T> implements IBaseRepository<T>{
         return this.db(this.table).select("*");
     }
 
-    async update(id: number, data: Partial<Omit<T, "id">>): Promise<T> {
-        const [row] = await this.db(this.table).where({id})
-                                               .update(data)
-                                               .returning("*");
+    async update(id: number, data: Partial<Omit<T, "id">>, trx?: Knex.Transaction): Promise<T> {
+        const query =  trx ?? this.db
+        const [row] = await query(this.table).where({id})
+                                             .update(data)
+                                             .returning("*");
         return row;
     }
     async delete(id: number): Promise<boolean> {

@@ -1,9 +1,9 @@
 import { Employee } from "../EmployeeModel";
-import { BaseRepository } from "../../../shared/repositories/BaseRepository";
 import { Knex } from "knex";
 import { IEmployeeRepository } from "./IEmployeeRepository";
+import { UserBoundRepository } from "src/shared/repositories/UserBoundRepository";
 
-export class EmployeeRepository extends BaseRepository<Employee> implements IEmployeeRepository{
+export class EmployeeRepository extends UserBoundRepository<Employee> implements IEmployeeRepository{
     constructor(db: Knex){
         super(db, 'employees')
     }

@@ -13,6 +13,9 @@ import { IEmployeeRepository } from '../employee/repositories/IEmployeeRepositor
 import { ISpecialistRepository } from '../specialist/repositories/ISpecialistRepository';
 import { IClinicRepository } from './repositories/IClinicRepository';
 import { UserService } from '../../shared/services/EntityCreation';
+import { ClinicUpdateRequest } from './dto/ClinicUpdateRequest';
+import { ClinicUpdateResponse } from './dto/ClinicUpdateResponse';
+import { number } from 'zod';
 
 export class ClinicController{
     constructor(
@@ -26,7 +29,7 @@ export class ClinicController{
         req: Request<{}, {}, ClinicRegisterRequest>,
         res: Response<ClinicRegisterResponse>
     ) => {
-        this.userServices.CreateWithUser(
+        await this.userServices.CreateWithUser(
             req.body.email,
             req.body.password,
             req.body.role,
@@ -39,6 +42,31 @@ export class ClinicController{
                 whatsapp: req.body.whatsapp ?? null,
             }),
             toClinicRegisterResponse,
+            res
+        );
+    }
+
+    updateClinic = async(
+        req: Request<{id: number}, {}, ClinicUpdateRequest>,
+        res: Response<ClinicUpdateResponse>
+    ) => {
+        const userId = Number(req.params.id);
+
+        await this.userServices.UpdateWithUser(
+            userId,
+            {email: req.body.email, password: req.body.password},
+            async (userId, trx) => {
+                const clinic = await this.clinicRepository.findByUserId(userId);
+                if(!clinic) return null;
+
+                return this.clinicRepository.update(clinic.id, {
+                    name: req.body.email,
+                    address: req.body.address,
+                    phone: req.body.phone,
+                    whatsapp: req.body.whatsapp
+                }, trx);
+            },
+            (user, clinic) => toClinicRegisterResponse(user, clinic),
             res
         );
     }
