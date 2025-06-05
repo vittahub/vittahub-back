@@ -1,4 +1,4 @@
-import { isValidCNPJ } from '../../src/modules/clinic/helpers/cnpjValidation';
+import { isValidCNPJ } from '../../../../src/modules/clinic/helpers/cnpjValidation';
 
 describe('isValidCNPJ', () => {
   it('should return true for a valid CNPJ with formatting', () => {

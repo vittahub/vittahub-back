@@ -1,4 +1,4 @@
-import { MockQueryBuilder } from "./MockQueryBuilder";
+import { MockQueryBuilder } from "../../../shared/MockQueryBuilder";
 
 export const createPatientMockKnex = (): { patientDb: jest.Mock; patientBuilder: MockQueryBuilder } => {
   const patientBuilder: MockQueryBuilder = {

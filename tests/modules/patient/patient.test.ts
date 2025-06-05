@@ -1,4 +1,4 @@
-import { isAdult } from "../../src/modules/patient/PatientModel";
+import { isAdult } from "../../../src/modules/patient/PatientModel";
 
 describe('isAdult', () => {
     it('should return true for ages above 18', () => {

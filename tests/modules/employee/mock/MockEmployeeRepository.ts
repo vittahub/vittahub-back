@@ -1,4 +1,4 @@
-import { EmployeeRepository } from "../../src/modules/employee/repositories/EmployeeRepository";
+import { EmployeeRepository } from "../../../../src/modules/employee/repositories/EmployeeRepository";
 
 export const createEmployeeMockRepository = (): jest.Mocked<EmployeeRepository> => {
   const employeeRepository = new EmployeeRepository({} as any)

@@ -1,4 +1,4 @@
-import { UserRepository } from "../../src/modules/auth/repositories/UserRepository";
+import { UserRepository } from "../../../../src/modules/auth/repositories/UserRepository";
 
 export const createUserMockRepository = (): jest.Mocked<UserRepository> => {
   const userRepository = new UserRepository({} as any);
