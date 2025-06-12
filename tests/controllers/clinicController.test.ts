@@ -3,6 +3,7 @@ import { ClinicController } from "../../src/controllers/ClinicController"
 import { createClinicMockRepository } from "../mocks/MockClinicRepository"
 import { createUserMockRepository } from "../mocks/MockUserRepository"
 import bcrypt from "bcryptjs";
+import { createEmployeeMockRepository } from "../../tests/mocks/MockEmployeeRepository";
 
 jest.mock('bcryptjs');
 jest.mock('../../src/helpers/responseMapping/toClinicRegisterResponse');
@@ -11,7 +12,8 @@ describe('clinic controller', () => {
     const userRepository = createUserMockRepository()
     const clinicRepository = createClinicMockRepository()
     const specialistRepository = createSpecialistMockRepository()
-    const clinicController = new ClinicController(userRepository, clinicRepository, specialistRepository)
+    const employeeRepository = createEmployeeMockRepository()
+    const clinicController = new ClinicController(userRepository, clinicRepository, specialistRepository, employeeRepository)
 
     const clinicRegisterReq = {
         body: {

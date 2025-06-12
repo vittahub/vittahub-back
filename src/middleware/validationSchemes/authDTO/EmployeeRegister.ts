@@ -6,6 +6,7 @@ export const EmployeeRegisterSchema: z.ZodType<EmployeeRegisterRequest> = z.obje
     email: z.string().min(5, "email too short").max(255, "email too long").email(),
     password: z.string().min(6, "password too short"),
     password_confirmation: z.string(),
+    clinic_id:z.number(),
     role: z.enum(["patient", "clinic", "specialist", "employee"]),
     function: z.string(),
     phone: z.string()
