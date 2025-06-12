@@ -1,16 +1,35 @@
-import { ClinicRegisterRequest} from "../../src/contracts/Requests/AuthRequests";
+import { ClinicRegisterRequest, SpecialistRegisterRequest} from "../../src/contracts/Requests/AuthRequests";
 import { ClinicRepository } from "../../src/repositories/ClinicRepository";
 import { UserRepository } from "../../src/repositories/UserRepository";
 import { Request, Response } from "express";
-import { ClinicRegisterResponse } from "../../src/contracts/Responses/AuthResponses";
+import { ClinicRegisterResponse, SpecialistRegisterResponse } from "../../src/contracts/Responses/AuthResponses";
 import bcrypt from 'bcryptjs';
 import toClinicRegisterResponse from "../../src/helpers/responseMapping/toClinicRegisterResponse";
+import { SpecialistRepository } from "../repositories/SpecialistRepository";
+import toSpecialistRegisterResponse from "../helpers/responseMapping/toSpecialistRegisterResponse";
+import { User } from "../models/user";
+import { Role } from "../types/Enums";
+
+
 
 export class ClinicController{
     constructor(
         private userRepository: UserRepository,
-        private clinicRepository: ClinicRepository 
+        private clinicRepository: ClinicRepository,
+        private specialistRepository: SpecialistRepository
     ){}
+    
+    private async createUser(email: string, password: string, role: Role): Promise <User| null> {
+        const userExists = await this.userRepository.findByEmail(email);
+        if (userExists) return null;
+
+        const hashedPassword = await bcrypt.hash(password, 10);
+        return await this.userRepository.create({
+            email,
+            password: hashedPassword,
+            role
+        });
+    }
 
     registerClinic = async (
         req: Request<{}, {}, ClinicRegisterRequest>,
@@ -18,14 +37,9 @@ export class ClinicController{
     ) => {
         const req_body: ClinicRegisterRequest = req.body;
 
-        const userExists = await this.userRepository.findByEmail(req_body.email);
-        if (userExists) return res.status(400).json({ error: 'User already exists' });
+        const user = await this.createUser(req_body.email, req_body.password, req_body.role);
+        if (!user) return res.status(400).json({ error: 'User already exists' });
     
-        const hashedPassword = await bcrypt.hash(req_body.password, 10);
-        const user = await this.userRepository.create({
-            email:req_body.email,
-            password: hashedPassword,
-            role:req_body.role});
         
         const clinic = await this.clinicRepository.create({
             user_id: user.id,
@@ -43,5 +57,31 @@ export class ClinicController{
 
         const clinicRegisterReponse = toClinicRegisterResponse(user, clinic);
         return res.status(201).json(clinicRegisterReponse)
+    }
+
+    registerSpecialist = async (
+        req: Request<{}, {}, SpecialistRegisterRequest>,
+        res: Response<SpecialistRegisterResponse>
+    ) => {
+        const req_body: SpecialistRegisterRequest = req.body;
+
+        const user = await this.createUser(req_body.email, req_body.password, req_body.role);
+        if (!user) return res.status(400).json({ error: 'User already exists' });
+
+        const specialist = await this.specialistRepository.create({
+            user_id: user.id,
+            name: req_body.name,
+            clinic_id: req_body.clinic_id,
+            speciality: req_body.speciality,
+            phone: req_body.phone
+        });
+
+        if(!user || !specialist){
+            this.userRepository.delete(user.id);
+            return res.status(500).json({ error: 'Occured a error during user creation'});
+        }
+
+        const specialistRegisterResponse = toSpecialistRegisterResponse(user, specialist);
+        return res.status(201).json(specialistRegisterResponse)
     }
 }

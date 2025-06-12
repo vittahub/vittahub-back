@@ -48,6 +48,7 @@ export interface SpecialistRegisterRequest {
   email: string;
   password: string;
   password_confirmation: string;
+  clinic_id: number
   role: Enums.Role
   speciality: string;
   phone: string;
